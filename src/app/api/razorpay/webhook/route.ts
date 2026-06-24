@@ -42,8 +42,12 @@ export async function POST(req: NextRequest) {
   }
 
   const event = payload.event as string;
-  const entity = (payload.payload as Record<string, unknown>)?.subscription
-    ?.entity as Record<string, unknown> | undefined;
+  const subscription = (
+    (payload.payload as Record<string, unknown>)?.subscription as
+      | Record<string, unknown>
+      | undefined
+  );
+  const entity = subscription?.entity as Record<string, unknown> | undefined;
 
   if (!entity) {
     return new Response(JSON.stringify({ received: true }), { status: 200 });
