@@ -6,16 +6,18 @@ export const razorpay = new Razorpay({
   key_secret: process.env.RAZORPAY_KEY_SECRET!,
 });
 
+type AnyRecord = Record<string, unknown>;
+
 export async function createRazorpayCustomer(
   email: string,
   name: string
 ): Promise<string> {
-  const customer = await razorpay.customers.create({
+  const customer = (await razorpay.customers.create({
     email,
     name,
-    fail_existing: "0",
-  });
-  return customer.id;
+    fail_existing: "0" as unknown as boolean,
+  })) as unknown as AnyRecord;
+  return String(customer["id"] ?? "");
 }
 
 export async function createRazorpaySubscription(
@@ -24,17 +26,21 @@ export async function createRazorpaySubscription(
   totalCount = 120,
   notes?: Record<string, string>
 ): Promise<{ id: string; short_url: string }> {
-  const subscription = await razorpay.subscriptions.create({
+  // Razorpay SDK types are missing customer_id — use unknown cast
+  const body: unknown = {
     plan_id: planId,
     customer_id: customerId,
     total_count: totalCount,
     quantity: 1,
     customer_notify: 1,
     notes,
-  });
+  };
+  const subscription = (await razorpay.subscriptions.create(
+    body as Parameters<typeof razorpay.subscriptions.create>[0]
+  )) as unknown as AnyRecord;
   return {
-    id: subscription.id,
-    short_url: (subscription as unknown as Record<string, string>).short_url ?? "",
+    id: String(subscription["id"] ?? ""),
+    short_url: String(subscription["short_url"] ?? ""),
   };
 }
 
