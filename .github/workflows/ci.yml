@@ -42,17 +42,17 @@ jobs:
     needs: [typecheck, lint]
     env:
       DATABASE_URL: postgresql://postgres:password@localhost:5432/ai_saas_test
-      UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
-      UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
+      UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL || 'https://ci-placeholder.upstash.io' }}
+      UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN || 'ci_placeholder_token' }}
       JWT_ACCESS_SECRET: ci-test-secret-access-key-at-least-32-chars
       JWT_REFRESH_SECRET: ci-test-secret-refresh-key-at-least-32-chars
-      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY || 'ci_placeholder_openrouter' }}
       OPENROUTER_SITE_URL: http://localhost:3000
       OPENROUTER_SITE_NAME: NexusAI
-      RAZORPAY_KEY_ID: ${{ secrets.RAZORPAY_KEY_ID_TEST }}
-      RAZORPAY_KEY_SECRET: ${{ secrets.RAZORPAY_KEY_SECRET_TEST }}
-      RAZORPAY_WEBHOOK_SECRET: ${{ secrets.RAZORPAY_WEBHOOK_SECRET_TEST }}
-      NEXT_PUBLIC_RAZORPAY_KEY_ID: ${{ secrets.RAZORPAY_KEY_ID_TEST }}
+      RAZORPAY_KEY_ID: ${{ secrets.RAZORPAY_KEY_ID_TEST || 'rzp_test_placeholder' }}
+      RAZORPAY_KEY_SECRET: ${{ secrets.RAZORPAY_KEY_SECRET_TEST || 'ci_placeholder_secret_key_32chars' }}
+      RAZORPAY_WEBHOOK_SECRET: ${{ secrets.RAZORPAY_WEBHOOK_SECRET_TEST || 'ci_placeholder_webhook_secret_key' }}
+      NEXT_PUBLIC_RAZORPAY_KEY_ID: ${{ secrets.RAZORPAY_KEY_ID_TEST || 'rzp_test_placeholder' }}
       NEXT_PUBLIC_APP_URL: http://localhost:3000
       NEXT_PUBLIC_APP_NAME: NexusAI
     steps:
