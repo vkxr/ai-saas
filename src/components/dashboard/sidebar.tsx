@@ -18,7 +18,7 @@ import { useAuthStore } from "@/stores/auth-store";
 import { useWorkspaceStore } from "@/stores/workspace-store";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getInitials } from "@/lib/utils";
-import { toast } from "@/components/ui/use-toast";
+
 import {
   DropdownMenu,
   DropdownMenuContent,

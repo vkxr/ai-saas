@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -29,7 +28,6 @@ type FormData = z.infer<typeof schema>;
 
 export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
-  const router = useRouter();
   const { setUser, setAccessToken } = useAuthStore();
   const { setCurrentWorkspace } = useWorkspaceStore();
 

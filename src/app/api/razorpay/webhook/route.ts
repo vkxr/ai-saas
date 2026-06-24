@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
 import { prisma } from "@/lib/db/prisma";
 import { verifyWebhookSignature } from "@/lib/razorpay/client";
-import { PLANS } from "@/lib/razorpay/plans";
+
 import type { PlanTier, SubscriptionStatus } from "@/types";
 
 const PLAN_ID_TO_TIER: Record<string, PlanTier> = {

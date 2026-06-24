@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/db/prisma";
-import { razorpay, createRazorpayCustomer, createRazorpaySubscription } from "@/lib/razorpay/client";
+import { createRazorpayCustomer, createRazorpaySubscription } from "@/lib/razorpay/client";
 import { PLANS } from "@/lib/razorpay/plans";
 import { apiResponse, apiError } from "@/lib/utils";
 import type { PlanTier } from "@/types";

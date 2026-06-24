@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import Script from "next/script";
 import { useWorkspaceStore } from "@/stores/workspace-store";
 import { useAuthStore } from "@/stores/auth-store";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "@/components/ui/use-toast";
@@ -65,7 +65,7 @@ export default function BillingPage() {
         subscription_id: subscriptionId,
         name: "NexusAI",
         description: `Upgrade to ${loadingTier} — ${interval}`,
-        handler: (response) => {
+        handler: (_response) => {
           // Payment captured — webhook will update DB
           // Optionally verify signature client-side or trust the webhook
           toast({

@@ -134,7 +134,7 @@ export default function LandingPage() {
 
         <p className="text-lg md:text-xl text-zinc-400 max-w-2xl mb-10 leading-relaxed">
           Multi-tenant workspaces. Razorpay plan tiers. Redis rate limiting. JWT refresh rotation.
-          AI endpoints gated at middleware. Everything you need, nothing you don't.
+          AI endpoints gated at middleware. Everything you need, nothing you don&apos;t.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 items-center">
