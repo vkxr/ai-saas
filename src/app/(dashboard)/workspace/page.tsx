@@ -34,9 +34,9 @@ const ROLE_ICONS: Record<MemberRole, typeof Crown> = {
 };
 
 const ROLE_COLORS: Record<MemberRole, string> = {
-  OWNER: "text-amber-400",
-  ADMIN: "text-violet-400",
-  MEMBER: "text-zinc-400",
+  OWNER: "text-amber-500",
+  ADMIN: "text-green-700",
+  MEMBER: "text-gray-400",
 };
 
 export default function WorkspacePage() {
@@ -48,8 +48,7 @@ export default function WorkspacePage() {
   const [inviting, setInviting] = useState(false);
 
   const currentUserMember = members.find((m) => m.user.id === user?.id);
-  const canManage =
-    currentUserMember?.role === "OWNER" || currentUserMember?.role === "ADMIN";
+  const canManage = currentUserMember?.role === "OWNER" || currentUserMember?.role === "ADMIN";
 
   useEffect(() => {
     if (!currentWorkspace) return;
@@ -112,34 +111,34 @@ export default function WorkspacePage() {
   return (
     <div className="p-8 max-w-4xl">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-white mb-1">Workspace</h1>
-        <p className="text-zinc-400 text-sm">{currentWorkspace?.name}</p>
+        <h1 className="text-2xl font-bold text-[#111] mb-1">Workspace</h1>
+        <p className="text-gray-400 text-sm">{currentWorkspace?.name}</p>
       </div>
 
       <div className="grid gap-6">
         {/* Members */}
-        <Card className="border-white/8 bg-white/2">
+        <Card className="border-gray-100 bg-white">
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle className="text-white flex items-center gap-2">
-                  <Users className="w-4 h-4 text-zinc-400" />
+                <CardTitle className="text-[#111] flex items-center gap-2">
+                  <Users className="w-4 h-4 text-gray-400" />
                   Team Members
                 </CardTitle>
-                <CardDescription>
+                <CardDescription className="text-gray-400">
                   {members.length} member{members.length !== 1 ? "s" : ""} in this workspace
                 </CardDescription>
               </div>
             </div>
           </CardHeader>
-          <CardContent className="space-y-3">
+          <CardContent className="space-y-1">
             {loading ? (
               [...Array(3)].map((_, i) => (
                 <div key={i} className="flex items-center gap-3 p-3">
-                  <Skeleton className="w-9 h-9 rounded-full bg-white/5" />
+                  <Skeleton className="w-9 h-9 rounded-full bg-gray-100" />
                   <div className="flex-1 space-y-2">
-                    <Skeleton className="h-3.5 w-32 bg-white/5" />
-                    <Skeleton className="h-3 w-48 bg-white/5" />
+                    <Skeleton className="h-3.5 w-32 bg-gray-100" />
+                    <Skeleton className="h-3 w-48 bg-gray-100" />
                   </div>
                 </div>
               ))
@@ -147,29 +146,28 @@ export default function WorkspacePage() {
               members.map((member) => {
                 const RoleIcon = ROLE_ICONS[member.role];
                 const isCurrentUser = member.user.id === user?.id;
-                const canRemove =
-                  canManage && !isCurrentUser && member.role !== "OWNER";
+                const canRemove = canManage && !isCurrentUser && member.role !== "OWNER";
 
                 return (
                   <div
                     key={member.id}
-                    className="flex items-center gap-3 rounded-xl p-3 hover:bg-white/3 transition-colors"
+                    className="flex items-center gap-3 rounded-xl p-3 hover:bg-gray-50 transition-colors"
                   >
                     <Avatar className="w-9 h-9">
-                      <AvatarFallback className="text-xs bg-zinc-800 text-zinc-300">
+                      <AvatarFallback className="text-xs bg-gray-100 text-gray-500">
                         {getInitials(member.user.name)}
                       </AvatarFallback>
                     </Avatar>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
-                        <p className="text-sm font-medium text-white truncate">
+                        <p className="text-sm font-medium text-[#111] truncate">
                           {member.user.name}
                           {isCurrentUser && (
-                            <span className="text-zinc-500 font-normal"> (you)</span>
+                            <span className="text-gray-400 font-normal"> (you)</span>
                           )}
                         </p>
                       </div>
-                      <p className="text-xs text-zinc-500 truncate">{member.user.email}</p>
+                      <p className="text-xs text-gray-400 truncate">{member.user.email}</p>
                     </div>
                     <div className="flex items-center gap-2">
                       <div className={`flex items-center gap-1 text-xs ${ROLE_COLORS[member.role]}`}>
@@ -180,7 +178,7 @@ export default function WorkspacePage() {
                         <Button
                           variant="ghost"
                           size="icon"
-                          className="h-7 w-7 text-zinc-600 hover:text-red-400 hover:bg-red-400/10"
+                          className="h-7 w-7 text-gray-300 hover:text-red-500 hover:bg-red-50"
                           onClick={() => handleRemove(member.user.id, member.user.name)}
                         >
                           <Trash2 className="w-3.5 h-3.5" />
@@ -196,13 +194,13 @@ export default function WorkspacePage() {
 
         {/* Invite */}
         {canManage && (
-          <Card className="border-white/8 bg-white/2">
+          <Card className="border-gray-100 bg-white">
             <CardHeader>
-              <CardTitle className="text-white text-base flex items-center gap-2">
-                <UserPlus className="w-4 h-4 text-zinc-400" />
+              <CardTitle className="text-[#111] text-base flex items-center gap-2">
+                <UserPlus className="w-4 h-4 text-gray-400" />
                 Invite Member
               </CardTitle>
-              <CardDescription>
+              <CardDescription className="text-gray-400">
                 Invite existing NexusAI users by email address
               </CardDescription>
             </CardHeader>
@@ -216,14 +214,14 @@ export default function WorkspacePage() {
                     placeholder="colleague@company.com"
                     value={inviteEmail}
                     onChange={(e) => setInviteEmail(e.target.value)}
-                    className="bg-white/4 border-white/10 text-white placeholder:text-zinc-500 focus-visible:ring-violet-500"
+                    className="bg-white border-gray-200 text-[#111] placeholder:text-gray-400 focus-visible:ring-green-600"
                   />
                 </div>
                 <Button
                   type="submit"
                   loading={inviting}
                   disabled={!inviteEmail.trim()}
-                  className="bg-violet-600 hover:bg-violet-700"
+                  className="bg-green-700 hover:bg-green-800 text-white"
                 >
                   <UserPlus className="w-4 h-4" />
                   Invite
@@ -234,11 +232,11 @@ export default function WorkspacePage() {
         )}
 
         {/* Workspace Info */}
-        <Card className="border-white/8 bg-white/2">
+        <Card className="border-gray-100 bg-white">
           <CardHeader>
-            <CardTitle className="text-white text-base">Workspace Details</CardTitle>
+            <CardTitle className="text-[#111] text-base">Workspace Details</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-0">
             {[
               { label: "Workspace name", value: currentWorkspace?.name },
               { label: "Slug", value: currentWorkspace?.slug, mono: true },
@@ -252,10 +250,10 @@ export default function WorkspacePage() {
                 ),
               },
             ].map((item) => (
-              <div key={item.label} className="flex justify-between items-center py-2 border-b border-white/5 last:border-0">
-                <span className="text-sm text-zinc-400">{item.label}</span>
+              <div key={item.label} className="flex justify-between items-center py-3 border-b border-gray-100 last:border-0">
+                <span className="text-sm text-gray-400">{item.label}</span>
                 {typeof item.value === "string" ? (
-                  <span className={`text-sm text-white ${item.mono ? "font-mono text-xs bg-white/5 px-2 py-0.5 rounded" : ""}`}>
+                  <span className={`text-sm text-[#111] ${item.mono ? "font-mono text-xs bg-gray-50 border border-gray-100 px-2 py-0.5 rounded" : ""}`}>
                     {item.value}
                   </span>
                 ) : (

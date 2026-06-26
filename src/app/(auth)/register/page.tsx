@@ -72,57 +72,57 @@ export default function RegisterPage() {
     }
   };
 
-  const strengthColors = ["bg-red-500", "bg-orange-500", "bg-yellow-500", "bg-emerald-500"];
+  const strengthColors = ["bg-red-500", "bg-orange-400", "bg-yellow-400", "bg-green-500"];
   const strengthLabels = ["Weak", "Fair", "Good", "Strong"];
 
   return (
     <div>
       <div className="mb-8 text-center">
-        <h1 className="text-2xl font-bold text-white mb-2">Create your account</h1>
-        <p className="text-sm text-zinc-400">Start building with AI in minutes</p>
+        <h1 className="text-2xl font-bold text-[#111] mb-2">Create your account</h1>
+        <p className="text-sm text-gray-500">Start building with AI in minutes</p>
       </div>
 
-      <div className="rounded-2xl border border-white/8 bg-white/2 backdrop-blur-sm p-6">
+      <div className="rounded-2xl border border-gray-100 bg-white shadow-sm p-6">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="space-y-1.5">
-            <Label htmlFor="name" className="text-zinc-300">Full name</Label>
+            <Label htmlFor="name" className="text-gray-700 text-sm">Full name</Label>
             <Input
               id="name"
               placeholder="Alex Johnson"
               autoComplete="name"
-              className="bg-white/4 border-white/10 text-white placeholder:text-zinc-500 focus-visible:ring-violet-500"
+              className="bg-white border-gray-200 text-[#111] placeholder:text-gray-400 focus-visible:ring-green-600"
               {...register("name")}
             />
-            {errors.name && <p className="text-xs text-red-400">{errors.name.message}</p>}
+            {errors.name && <p className="text-xs text-red-500">{errors.name.message}</p>}
           </div>
 
           <div className="space-y-1.5">
-            <Label htmlFor="email" className="text-zinc-300">Work email</Label>
+            <Label htmlFor="email" className="text-gray-700 text-sm">Work email</Label>
             <Input
               id="email"
               type="email"
               placeholder="you@company.com"
               autoComplete="email"
-              className="bg-white/4 border-white/10 text-white placeholder:text-zinc-500 focus-visible:ring-violet-500"
+              className="bg-white border-gray-200 text-[#111] placeholder:text-gray-400 focus-visible:ring-green-600"
               {...register("email")}
             />
-            {errors.email && <p className="text-xs text-red-400">{errors.email.message}</p>}
+            {errors.email && <p className="text-xs text-red-500">{errors.email.message}</p>}
           </div>
 
           <div className="space-y-1.5">
-            <Label htmlFor="password" className="text-zinc-300">Password</Label>
+            <Label htmlFor="password" className="text-gray-700 text-sm">Password</Label>
             <div className="relative">
               <Input
                 id="password"
                 type={showPassword ? "text" : "password"}
                 placeholder="••••••••"
                 autoComplete="new-password"
-                className="bg-white/4 border-white/10 text-white placeholder:text-zinc-500 focus-visible:ring-violet-500 pr-10"
+                className="bg-white border-gray-200 text-[#111] placeholder:text-gray-400 focus-visible:ring-green-600 pr-10"
                 {...register("password")}
               />
               <button
                 type="button"
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-300 transition-colors"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -135,47 +135,47 @@ export default function RegisterPage() {
                     <div
                       key={i}
                       className={`h-1 flex-1 rounded-full transition-colors ${
-                        i < strength ? strengthColors[strength - 1] ?? "bg-zinc-700" : "bg-zinc-700"
+                        i < strength ? strengthColors[strength - 1] ?? "bg-gray-200" : "bg-gray-200"
                       }`}
                     />
                   ))}
                 </div>
-                <p className="text-xs text-zinc-400">{strengthLabels[strength - 1] ?? "Enter password"}</p>
+                <p className="text-xs text-gray-500">{strengthLabels[strength - 1] ?? "Enter password"}</p>
               </div>
             )}
-            {errors.password && <p className="text-xs text-red-400">{errors.password.message}</p>}
+            {errors.password && <p className="text-xs text-red-500">{errors.password.message}</p>}
           </div>
 
           <div className="space-y-1.5">
-            <Label htmlFor="workspaceName" className="text-zinc-300">
-              Workspace name <span className="text-zinc-500">(optional)</span>
+            <Label htmlFor="workspaceName" className="text-gray-700 text-sm">
+              Workspace name <span className="text-gray-400">(optional)</span>
             </Label>
             <Input
               id="workspaceName"
               placeholder="Acme Corp"
-              className="bg-white/4 border-white/10 text-white placeholder:text-zinc-500 focus-visible:ring-violet-500"
+              className="bg-white border-gray-200 text-[#111] placeholder:text-gray-400 focus-visible:ring-green-600"
               {...register("workspaceName")}
             />
           </div>
 
           <Button
             type="submit"
-            className="w-full bg-violet-600 hover:bg-violet-700"
+            className="w-full bg-green-700 hover:bg-green-800 text-white"
             loading={isSubmitting}
           >
             <UserPlus className="w-4 h-4" />
             Create account
           </Button>
 
-          <p className="text-xs text-center text-zinc-500">
+          <p className="text-xs text-center text-gray-400">
             By signing up you agree to our Terms and Privacy Policy
           </p>
         </form>
       </div>
 
-      <p className="text-center text-sm text-zinc-400 mt-6">
+      <p className="text-center text-sm text-gray-500 mt-6">
         Already have an account?{" "}
-        <Link href="/login" className="text-violet-400 hover:text-violet-300 font-medium transition-colors">
+        <Link href="/login" className="text-green-700 hover:text-green-800 font-medium transition-colors">
           Sign in
         </Link>
       </p>

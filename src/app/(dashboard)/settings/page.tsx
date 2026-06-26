@@ -64,8 +64,8 @@ export default function SettingsPage() {
   return (
     <div className="p-8 max-w-3xl">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-white mb-1">Settings</h1>
-        <p className="text-zinc-400 text-sm">Manage your account preferences</p>
+        <h1 className="text-2xl font-bold text-[#111] mb-1">Settings</h1>
+        <p className="text-gray-400 text-sm">Manage your account preferences</p>
       </div>
 
       <div className="flex gap-6">
@@ -77,8 +77,8 @@ export default function SettingsPage() {
               onClick={() => setActiveTab(tab.id)}
               className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-left transition-all ${
                 activeTab === tab.id
-                  ? "bg-violet-600/15 text-violet-300 border border-violet-500/20"
-                  : "text-zinc-400 hover:text-white hover:bg-white/5"
+                  ? "bg-green-50 text-green-700 border border-green-100"
+                  : "text-gray-500 hover:text-[#111] hover:bg-gray-50"
               }`}
             >
               <tab.icon className="w-4 h-4" />
@@ -90,52 +90,52 @@ export default function SettingsPage() {
         {/* Content */}
         <div className="flex-1 min-w-0">
           {activeTab === "profile" && (
-            <Card className="border-white/8 bg-white/2">
+            <Card className="border-gray-100 bg-white">
               <CardHeader>
-                <CardTitle className="text-white">Profile Information</CardTitle>
-                <CardDescription>Update your personal details</CardDescription>
+                <CardTitle className="text-[#111]">Profile Information</CardTitle>
+                <CardDescription className="text-gray-400">Update your personal details</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 {/* Avatar */}
                 <div className="flex items-center gap-4">
                   <Avatar className="w-16 h-16">
-                    <AvatarFallback className="text-lg bg-violet-600/20 text-violet-400">
+                    <AvatarFallback className="text-lg bg-green-50 text-green-700">
                       {getInitials(user?.name ?? "U")}
                     </AvatarFallback>
                   </Avatar>
                   <div>
-                    <p className="text-sm font-medium text-white">{user?.name}</p>
-                    <p className="text-xs text-zinc-500">{user?.email}</p>
+                    <p className="text-sm font-medium text-[#111]">{user?.name}</p>
+                    <p className="text-xs text-gray-400">{user?.email}</p>
                   </div>
                 </div>
 
-                <Separator className="bg-white/5" />
+                <Separator className="bg-gray-100" />
 
                 <form onSubmit={handleSubmit(onSaveProfile)} className="space-y-4">
                   <div className="space-y-1.5">
-                    <Label className="text-zinc-300">Full name</Label>
+                    <Label className="text-gray-700 text-sm">Full name</Label>
                     <Input
-                      className="bg-white/4 border-white/10 text-white focus-visible:ring-violet-500"
+                      className="bg-white border-gray-200 text-[#111] placeholder:text-gray-400 focus-visible:ring-green-600"
                       {...register("name")}
                     />
-                    {errors.name && <p className="text-xs text-red-400">{errors.name.message}</p>}
+                    {errors.name && <p className="text-xs text-red-500">{errors.name.message}</p>}
                   </div>
 
                   <div className="space-y-1.5">
-                    <Label className="text-zinc-300">Email address</Label>
+                    <Label className="text-gray-700 text-sm">Email address</Label>
                     <Input
                       value={user?.email ?? ""}
                       disabled
-                      className="bg-white/2 border-white/5 text-zinc-500"
+                      className="bg-gray-50 border-gray-100 text-gray-400"
                     />
-                    <p className="text-xs text-zinc-500">Email cannot be changed</p>
+                    <p className="text-xs text-gray-400">Email cannot be changed</p>
                   </div>
 
                   <Button
                     type="submit"
                     loading={isSubmitting}
                     disabled={!isDirty}
-                    className="bg-violet-600 hover:bg-violet-700"
+                    className="bg-green-700 hover:bg-green-800 text-white"
                   >
                     Save changes
                   </Button>
@@ -145,10 +145,10 @@ export default function SettingsPage() {
           )}
 
           {activeTab === "notifications" && (
-            <Card className="border-white/8 bg-white/2">
+            <Card className="border-gray-100 bg-white">
               <CardHeader>
-                <CardTitle className="text-white">Notifications</CardTitle>
-                <CardDescription>Configure when we contact you</CardDescription>
+                <CardTitle className="text-[#111]">Notifications</CardTitle>
+                <CardDescription className="text-gray-400">Configure when we contact you</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 {[
@@ -156,12 +156,12 @@ export default function SettingsPage() {
                   { label: "Billing updates", desc: "Invoices, renewals, and payment issues" },
                   { label: "Team activity", desc: "New members and permission changes" },
                 ].map((item) => (
-                  <div key={item.label} className="flex items-center justify-between py-3 border-b border-white/5 last:border-0">
+                  <div key={item.label} className="flex items-center justify-between py-3 border-b border-gray-100 last:border-0">
                     <div>
-                      <p className="text-sm text-white">{item.label}</p>
-                      <p className="text-xs text-zinc-500">{item.desc}</p>
+                      <p className="text-sm text-[#111]">{item.label}</p>
+                      <p className="text-xs text-gray-400">{item.desc}</p>
                     </div>
-                    <div className="w-10 h-5 rounded-full bg-violet-600 cursor-pointer relative">
+                    <div className="w-10 h-5 rounded-full bg-green-600 cursor-pointer relative">
                       <div className="absolute right-0.5 top-0.5 w-4 h-4 rounded-full bg-white shadow" />
                     </div>
                   </div>
@@ -171,28 +171,28 @@ export default function SettingsPage() {
           )}
 
           {activeTab === "security" && (
-            <Card className="border-white/8 bg-white/2">
+            <Card className="border-gray-100 bg-white">
               <CardHeader>
-                <CardTitle className="text-white">Security</CardTitle>
-                <CardDescription>Manage your account security</CardDescription>
+                <CardTitle className="text-[#111]">Security</CardTitle>
+                <CardDescription className="text-gray-400">Manage your account security</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div>
-                  <p className="text-sm font-medium text-white mb-1">Active sessions</p>
-                  <p className="text-xs text-zinc-500 mb-3">JWT refresh tokens are rotated on each use and expire after 7 days.</p>
-                  <div className="rounded-lg border border-white/5 bg-white/2 p-3 text-xs font-mono text-zinc-400">
+                  <p className="text-sm font-medium text-[#111] mb-1">Active sessions</p>
+                  <p className="text-xs text-gray-400 mb-3">JWT refresh tokens are rotated on each use and expire after 7 days.</p>
+                  <div className="rounded-lg border border-gray-100 bg-gray-50 p-3 text-xs font-mono text-gray-500">
                     Session · Expires in 7 days · {navigator?.userAgent?.slice(0, 40) ?? "Unknown browser"}
                   </div>
                 </div>
 
-                <Separator className="bg-white/5" />
+                <Separator className="bg-gray-100" />
 
                 <div>
-                  <p className="text-sm font-medium text-red-400 mb-1 flex items-center gap-2">
+                  <p className="text-sm font-medium text-red-500 mb-1 flex items-center gap-2">
                     <Trash2 className="w-3.5 h-3.5" />
                     Danger zone
                   </p>
-                  <p className="text-xs text-zinc-500 mb-3">
+                  <p className="text-xs text-gray-400 mb-3">
                     Delete your account permanently. This action cannot be undone.
                   </p>
                   <Button variant="destructive" size="sm">

@@ -97,17 +97,17 @@ export default function LandingPage() {
         {/* Nature background photo */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?auto=format&fit=crop&w=1920&q=85"
+          src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1920&q=85"
           alt=""
           aria-hidden
           className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none select-none"
         />
-        {/* Overlay — darken top for nav, light in middle, darken bottom for card readability */}
+        {/* Overlay — deep shadow across the entire frame so white text is unmistakably the focus */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              "linear-gradient(to bottom, rgba(0,0,0,0.38) 0%, rgba(0,0,0,0.08) 30%, rgba(0,0,0,0.10) 55%, rgba(0,0,0,0.52) 100%)",
+              "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.42) 35%, rgba(0,0,0,0.48) 60%, rgba(0,0,0,0.72) 100%)",
           }}
         />
 

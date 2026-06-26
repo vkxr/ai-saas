@@ -66,17 +66,12 @@ export default function BillingPage() {
         name: "NexusAI",
         description: `Upgrade to ${loadingTier} — ${interval}`,
         handler: (_response) => {
-          // Payment captured — webhook will update DB
-          // Optionally verify signature client-side or trust the webhook
-          toast({
-            title: "Payment successful!",
-            description: "Your plan is being activated. Refresh in a moment.",
-          });
+          toast({ title: "Payment successful!", description: "Your plan is being activated. Refresh in a moment." });
           setLoadingTier(null);
           setTimeout(() => window.location.reload(), 2000);
         },
         prefill: { name: user?.name, email: user?.email ?? undefined },
-        theme: { color: "#7c3aed" },
+        theme: { color: "#15803d" },
         modal: {
           ondismiss: () => {
             toast({ title: "Payment canceled", description: "Your plan was not changed." });
@@ -147,7 +142,6 @@ export default function BillingPage() {
 
   return (
     <>
-      {/* Load Razorpay checkout.js */}
       <Script
         src="https://checkout.razorpay.com/v1/checkout.js"
         onLoad={() => setRzpReady(true)}
@@ -156,12 +150,12 @@ export default function BillingPage() {
 
       <div className="p-8 max-w-5xl">
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-white mb-1">Billing & Plans</h1>
-          <p className="text-zinc-400 text-sm">Manage your subscription · Powered by Razorpay</p>
+          <h1 className="text-2xl font-bold text-[#111] mb-1">Billing & Plans</h1>
+          <p className="text-gray-400 text-sm">Manage your subscription · Powered by Razorpay</p>
         </div>
 
         {/* Current Plan Status */}
-        <Card className="border-white/8 bg-white/2 mb-8">
+        <Card className="border-gray-100 bg-white mb-8">
           <CardContent className="p-6">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
@@ -169,13 +163,7 @@ export default function BillingPage() {
                   <Badge variant={currentTier.toLowerCase() as "free" | "pro" | "enterprise"}>
                     {currentTier}
                   </Badge>
-                  <Badge
-                    variant={
-                      subStatus === "ACTIVE" || subStatus === "TRIALING"
-                        ? "success"
-                        : "warning"
-                    }
-                  >
+                  <Badge variant={subStatus === "ACTIVE" || subStatus === "TRIALING" ? "success" : "warning"}>
                     {subStatus}
                   </Badge>
                   {cancelAtPeriodEnd && (
@@ -185,16 +173,12 @@ export default function BillingPage() {
                     </Badge>
                   )}
                 </div>
-                <p className="text-white font-medium">{PLANS[currentTier].name} Plan</p>
-                <p className="text-sm text-zinc-400">
+                <p className="text-[#111] font-medium">{PLANS[currentTier].name} Plan</p>
+                <p className="text-sm text-gray-400">
                   {currentTier === "FREE"
                     ? "Free forever with limited usage"
                     : periodEnd
-                    ? `Renews ${new Date(periodEnd).toLocaleDateString("en-IN", {
-                        month: "long",
-                        day: "numeric",
-                        year: "numeric",
-                      })}`
+                    ? `Renews ${new Date(periodEnd).toLocaleDateString("en-IN", { month: "long", day: "numeric", year: "numeric" })}`
                     : ""}
                 </p>
               </div>
@@ -202,7 +186,7 @@ export default function BillingPage() {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="border-red-500/20 text-red-400 hover:bg-red-400/10 hover:text-red-300"
+                  className="border-red-200 text-red-500 hover:bg-red-50 hover:text-red-600"
                   onClick={handleCancel}
                   loading={canceling}
                 >
@@ -215,20 +199,20 @@ export default function BillingPage() {
 
         {/* Interval Toggle */}
         <div className="flex items-center justify-center mb-8">
-          <div className="inline-flex rounded-xl border border-white/10 bg-white/3 p-1">
+          <div className="inline-flex rounded-xl border border-gray-200 bg-gray-50 p-1">
             {(["monthly", "yearly"] as const).map((i) => (
               <button
                 key={i}
                 onClick={() => setInterval(i)}
                 className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-all ${
                   interval === i
-                    ? "bg-violet-600 text-white"
-                    : "text-zinc-400 hover:text-white"
+                    ? "bg-green-700 text-white shadow-sm"
+                    : "text-gray-500 hover:text-[#111]"
                 }`}
               >
                 {i === "monthly" ? "Monthly" : "Yearly"}{" "}
                 {i === "yearly" && (
-                  <span className="text-xs text-emerald-400 ml-1">−17%</span>
+                  <span className="text-xs text-green-400 ml-1">−17%</span>
                 )}
               </button>
             ))}
@@ -241,24 +225,21 @@ export default function BillingPage() {
             const plan = PLANS[tier];
             const isCurrent = tier === currentTier;
             const isHighlighted = tier === "PRO";
-            const price =
-              interval === "yearly"
-                ? plan.yearlyPriceDisplay
-                : plan.monthlyPriceDisplay;
+            const price = interval === "yearly" ? plan.yearlyPriceDisplay : plan.monthlyPriceDisplay;
             const perLabel = plan.monthlyPricePaise === 0 ? "" : interval === "yearly" ? "/yr" : "/mo";
 
             return (
               <div
                 key={tier}
-                className={`relative rounded-2xl border p-6 flex flex-col ${
+                className={`relative rounded-2xl border p-6 flex flex-col bg-white ${
                   isHighlighted
-                    ? "border-violet-500/40 bg-violet-500/5"
-                    : "border-white/8 bg-white/2"
-                }`}
+                    ? "border-green-200 shadow-lg shadow-green-500/8"
+                    : "border-gray-100 hover:shadow-sm"
+                } transition-shadow`}
               >
                 {isHighlighted && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <Badge className="bg-violet-600 text-white border-0 text-xs px-3">
+                    <Badge className="bg-green-700 text-white border-0 text-xs px-3">
                       Most popular
                     </Badge>
                   </div>
@@ -266,28 +247,24 @@ export default function BillingPage() {
 
                 <div className="mb-6">
                   <div className="flex items-center gap-2 mb-3">
-                    <p className="font-semibold text-white">{plan.name}</p>
+                    <p className="font-semibold text-[#111]">{plan.name}</p>
                     {isCurrent && (
-                      <Badge
-                        variant={tier.toLowerCase() as "free" | "pro" | "enterprise"}
-                      >
+                      <Badge variant={tier.toLowerCase() as "free" | "pro" | "enterprise"}>
                         Current
                       </Badge>
                     )}
                   </div>
                   <div className="flex items-baseline gap-1 mb-2">
-                    <span className="text-3xl font-bold text-white">{price}</span>
-                    {perLabel && (
-                      <span className="text-zinc-500 text-sm">{perLabel}</span>
-                    )}
+                    <span className="text-3xl font-bold text-[#111]">{price}</span>
+                    {perLabel && <span className="text-gray-400 text-sm">{perLabel}</span>}
                   </div>
-                  <p className="text-sm text-zinc-400">{plan.description}</p>
+                  <p className="text-sm text-gray-400">{plan.description}</p>
                 </div>
 
                 <ul className="space-y-2.5 mb-6 flex-1">
                   {plan.features.map((f) => (
-                    <li key={f} className="flex items-start gap-2 text-sm text-zinc-300">
-                      <Check className="w-3.5 h-3.5 text-violet-400 flex-shrink-0 mt-0.5" />
+                    <li key={f} className="flex items-start gap-2 text-sm text-gray-600">
+                      <Check className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
                       {f}
                     </li>
                   ))}
@@ -295,7 +272,7 @@ export default function BillingPage() {
 
                 {!isCurrent ? (
                   <Button
-                    className={isHighlighted ? "bg-violet-600 hover:bg-violet-700" : ""}
+                    className={isHighlighted ? "bg-green-700 hover:bg-green-800 text-white" : "border border-gray-200 text-[#111] bg-white hover:bg-gray-50"}
                     variant={isHighlighted ? "default" : "outline"}
                     loading={loadingTier === tier}
                     disabled={tier === "FREE" || !!loadingTier || !rzpReady}
@@ -320,10 +297,10 @@ export default function BillingPage() {
           })}
         </div>
 
-        <div className="mt-8 rounded-xl border border-white/5 bg-white/2 p-4">
-          <p className="text-xs text-zinc-500 text-center">
+        <div className="mt-8 rounded-xl border border-gray-100 bg-gray-50 p-4">
+          <p className="text-xs text-gray-400 text-center">
             Payments processed securely by{" "}
-            <span className="text-zinc-300 font-medium">Razorpay</span>. Subscriptions
+            <span className="text-gray-600 font-medium">Razorpay</span>. Subscriptions
             auto-renew monthly or yearly. Cancel anytime before renewal.
             INR pricing — GST may apply.
           </p>

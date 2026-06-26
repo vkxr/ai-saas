@@ -67,43 +67,43 @@ export function Sidebar() {
   };
 
   return (
-    <aside className="flex h-screen w-60 flex-col border-r border-white/8 bg-[#0a0a14] overflow-hidden">
+    <aside className="flex h-screen w-60 flex-col border-r border-gray-100 bg-white overflow-hidden">
       {/* Logo */}
-      <div className="flex items-center gap-2.5 px-5 py-5 border-b border-white/5">
-        <div className="w-7 h-7 rounded-lg bg-violet-600 flex items-center justify-center flex-shrink-0">
+      <div className="flex items-center gap-2.5 px-5 py-5 border-b border-gray-100">
+        <div className="w-7 h-7 rounded-lg bg-green-700 flex items-center justify-center flex-shrink-0">
           <Zap className="w-3.5 h-3.5 text-white" />
         </div>
-        <span className="font-semibold text-white text-sm">NexusAI</span>
+        <span className="font-semibold text-[#111] text-sm">NexusAI</span>
       </div>
 
       {/* Workspace Switcher */}
       <div className="px-3 pt-3">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <button className="w-full flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-left text-sm hover:bg-white/5 transition-colors group">
-              <div className="w-7 h-7 rounded-md bg-violet-600/20 border border-violet-500/20 flex items-center justify-center flex-shrink-0">
-                <span className="text-xs text-violet-400 font-bold">
+            <button className="w-full flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-left text-sm hover:bg-gray-50 transition-colors group">
+              <div className="w-7 h-7 rounded-md bg-green-50 border border-green-100 flex items-center justify-center flex-shrink-0">
+                <span className="text-xs text-green-700 font-bold">
                   {currentWorkspace?.name?.slice(0, 1).toUpperCase() ?? "W"}
                 </span>
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-white text-xs font-medium truncate">
+                <p className="text-[#111] text-xs font-medium truncate">
                   {currentWorkspace?.name ?? "Select workspace"}
                 </p>
-                <p className="text-zinc-500 text-[11px]">{currentWorkspace?.currentUserRole ?? ""}</p>
+                <p className="text-gray-400 text-[11px]">{currentWorkspace?.currentUserRole ?? ""}</p>
               </div>
-              <ChevronDown className="w-3.5 h-3.5 text-zinc-500 group-hover:text-zinc-300 transition-colors" />
+              <ChevronDown className="w-3.5 h-3.5 text-gray-400 group-hover:text-gray-600 transition-colors" />
             </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56" align="start">
-            <DropdownMenuLabel className="text-xs text-zinc-500">Workspaces</DropdownMenuLabel>
+            <DropdownMenuLabel className="text-xs text-gray-400">Workspaces</DropdownMenuLabel>
             {workspaces.map((ws) => (
               <DropdownMenuItem
                 key={ws.id}
                 onClick={() => setCurrentWorkspace(ws)}
                 className={cn(currentWorkspace?.id === ws.id && "bg-accent")}
               >
-                <div className="w-5 h-5 rounded bg-violet-600/20 flex items-center justify-center text-xs text-violet-400 font-bold mr-2">
+                <div className="w-5 h-5 rounded bg-green-50 flex items-center justify-center text-xs text-green-700 font-bold mr-2">
                   {ws.name.slice(0, 1).toUpperCase()}
                 </div>
                 <span className="truncate">{ws.name}</span>
@@ -131,8 +131,8 @@ export function Sidebar() {
               className={cn(
                 "flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-all duration-150",
                 active
-                  ? "bg-violet-600/15 text-violet-300 border border-violet-500/20"
-                  : "text-zinc-400 hover:text-zinc-200 hover:bg-white/5"
+                  ? "bg-green-50 text-green-700 border border-green-100"
+                  : "text-gray-500 hover:text-[#111] hover:bg-gray-50"
               )}
             >
               <item.icon className="w-4 h-4 flex-shrink-0" />
@@ -144,9 +144,9 @@ export function Sidebar() {
 
       {/* Plan Badge */}
       <div className="px-4 py-2">
-        <div className="rounded-lg border border-white/5 bg-white/2 p-3">
+        <div className="rounded-lg border border-gray-100 bg-gray-50 p-3">
           <div className="flex items-center justify-between mb-1.5">
-            <span className="text-xs text-zinc-500">Current plan</span>
+            <span className="text-xs text-gray-400">Current plan</span>
             <Badge variant={tierBadge.variant} className="text-[10px] px-1.5 py-0">
               {tierBadge.label}
             </Badge>
@@ -154,7 +154,7 @@ export function Sidebar() {
           {tier === "FREE" && (
             <Link
               href="/billing"
-              className="text-xs text-violet-400 hover:text-violet-300 transition-colors"
+              className="text-xs text-green-700 hover:text-green-800 transition-colors"
             >
               Upgrade to Pro →
             </Link>
@@ -163,24 +163,24 @@ export function Sidebar() {
       </div>
 
       {/* User */}
-      <div className="border-t border-white/5 p-3">
+      <div className="border-t border-gray-100 p-3">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <button className="w-full flex items-center gap-2.5 rounded-lg px-2 py-2 hover:bg-white/5 transition-colors">
+            <button className="w-full flex items-center gap-2.5 rounded-lg px-2 py-2 hover:bg-gray-50 transition-colors">
               <Avatar className="w-7 h-7">
                 <AvatarImage src={user?.avatarUrl ?? undefined} />
-                <AvatarFallback className="text-[11px]">{getInitials(user?.name ?? "U")}</AvatarFallback>
+                <AvatarFallback className="text-[11px] bg-green-50 text-green-700">{getInitials(user?.name ?? "U")}</AvatarFallback>
               </Avatar>
               <div className="flex-1 min-w-0 text-left">
-                <p className="text-xs text-white font-medium truncate">{user?.name}</p>
-                <p className="text-[11px] text-zinc-500 truncate">{user?.email}</p>
+                <p className="text-xs text-[#111] font-medium truncate">{user?.name}</p>
+                <p className="text-[11px] text-gray-400 truncate">{user?.email}</p>
               </div>
             </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-48" align="end" side="top">
             <DropdownMenuLabel className="font-normal">
               <p className="text-sm font-medium">{user?.name}</p>
-              <p className="text-xs text-zinc-400 truncate">{user?.email}</p>
+              <p className="text-xs text-gray-400 truncate">{user?.email}</p>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
@@ -188,7 +188,7 @@ export function Sidebar() {
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem
-              className="text-red-400 focus:text-red-400 focus:bg-red-400/10"
+              className="text-red-500 focus:text-red-500 focus:bg-red-50"
               onClick={handleLogout}
             >
               <LogOut className="w-4 h-4" />

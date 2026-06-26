@@ -53,7 +53,6 @@ function LoginForm() {
       if (json.data.workspace) setCurrentWorkspace(json.data.workspace);
 
       const redirect = searchParams.get("redirect") ?? "/dashboard";
-      // Hard navigation ensures the middleware picks up the new access_token cookie
       window.location.href = redirect;
     } catch {
       toast({ variant: "destructive", title: "Network error", description: "Please try again." });
@@ -63,54 +62,54 @@ function LoginForm() {
   return (
     <div>
       <div className="mb-8 text-center">
-        <h1 className="text-2xl font-bold text-white mb-2">Welcome back</h1>
-        <p className="text-sm text-zinc-400">Sign in to your NexusAI account</p>
+        <h1 className="text-2xl font-bold text-[#111] mb-2">Welcome back</h1>
+        <p className="text-sm text-gray-500">Sign in to your NexusAI account</p>
       </div>
 
-      <div className="rounded-2xl border border-white/8 bg-white/2 backdrop-blur-sm p-6">
+      <div className="rounded-2xl border border-gray-100 bg-white shadow-sm p-6">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="space-y-1.5">
-            <Label htmlFor="email" className="text-zinc-300">Email</Label>
+            <Label htmlFor="email" className="text-gray-700 text-sm">Email</Label>
             <Input
               id="email"
               type="email"
               placeholder="you@company.com"
               autoComplete="email"
-              className="bg-white/4 border-white/10 text-white placeholder:text-zinc-500 focus-visible:ring-violet-500"
+              className="bg-white border-gray-200 text-[#111] placeholder:text-gray-400 focus-visible:ring-green-600"
               {...register("email")}
             />
             {errors.email && (
-              <p className="text-xs text-red-400">{errors.email.message}</p>
+              <p className="text-xs text-red-500">{errors.email.message}</p>
             )}
           </div>
 
           <div className="space-y-1.5">
-            <Label htmlFor="password" className="text-zinc-300">Password</Label>
+            <Label htmlFor="password" className="text-gray-700 text-sm">Password</Label>
             <div className="relative">
               <Input
                 id="password"
                 type={showPassword ? "text" : "password"}
                 placeholder="••••••••"
                 autoComplete="current-password"
-                className="bg-white/4 border-white/10 text-white placeholder:text-zinc-500 focus-visible:ring-violet-500 pr-10"
+                className="bg-white border-gray-200 text-[#111] placeholder:text-gray-400 focus-visible:ring-green-600 pr-10"
                 {...register("password")}
               />
               <button
                 type="button"
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-300 transition-colors"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
             </div>
             {errors.password && (
-              <p className="text-xs text-red-400">{errors.password.message}</p>
+              <p className="text-xs text-red-500">{errors.password.message}</p>
             )}
           </div>
 
           <Button
             type="submit"
-            className="w-full bg-violet-600 hover:bg-violet-700"
+            className="w-full bg-green-700 hover:bg-green-800 text-white"
             loading={isSubmitting}
           >
             <LogIn className="w-4 h-4" />
@@ -119,9 +118,9 @@ function LoginForm() {
         </form>
       </div>
 
-      <p className="text-center text-sm text-zinc-400 mt-6">
+      <p className="text-center text-sm text-gray-500 mt-6">
         Don&apos;t have an account?{" "}
-        <Link href="/register" className="text-violet-400 hover:text-violet-300 font-medium transition-colors">
+        <Link href="/register" className="text-green-700 hover:text-green-800 font-medium transition-colors">
           Sign up free
         </Link>
       </p>
