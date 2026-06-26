@@ -1,7 +1,5 @@
 import Link from "next/link";
 import { ArrowRight, Zap, Shield, Users, BarChart3, Cpu, Globe, KeyRound, Copy } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 
 const features = [
   {
@@ -42,7 +40,7 @@ const plans = [
     price: "₹0",
     description: "For individuals exploring AI",
     badge: null,
-    features: ["50 AI requests/month", "100K tokens", "1 workspace", "Community support"],
+    features: ["50 AI requests / month", "100K tokens", "1 workspace", "Community support"],
     cta: "Start free",
     highlighted: false,
   },
@@ -53,7 +51,7 @@ const plans = [
     description: "For growing teams",
     badge: "Most Popular",
     features: [
-      "2,000 AI requests/month",
+      "2,000 AI requests / month",
       "2M tokens",
       "5 workspaces",
       "10 team members",
@@ -71,7 +69,7 @@ const plans = [
     description: "For large organizations",
     badge: null,
     features: [
-      "50,000 AI requests/month",
+      "50,000 AI requests / month",
       "50M tokens",
       "Unlimited workspaces",
       "Unlimited members",
@@ -85,247 +83,338 @@ const plans = [
   },
 ];
 
+const TECHS = ["Next.js 15", "TypeScript", "PostgreSQL", "Prisma", "Redis", "Razorpay", "OpenRouter", "Docker"];
+
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-[#080811] text-white overflow-x-hidden">
-      {/* Ambient background */}
-      <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-violet-600/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-violet-800/8 rounded-full blur-[100px]" />
-      </div>
+    <div className="min-h-screen bg-[#f7f6f3] text-[#111] overflow-x-hidden">
 
-      {/* Nav */}
-      <nav className="relative z-10 flex items-center justify-between px-6 py-5 max-w-7xl mx-auto">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-violet-600 flex items-center justify-center">
-            <Zap className="w-4 h-4 text-white" />
+      {/* ══════════════════════════════════════════
+          HERO — full-viewport nature image
+      ══════════════════════════════════════════ */}
+      <section className="relative min-h-screen flex flex-col">
+
+        {/* Nature background photo */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?auto=format&fit=crop&w=1920&q=85"
+          alt=""
+          aria-hidden
+          className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none select-none"
+        />
+        {/* Overlay — darken top for nav, light in middle, darken bottom for card readability */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(0,0,0,0.38) 0%, rgba(0,0,0,0.08) 30%, rgba(0,0,0,0.10) 55%, rgba(0,0,0,0.52) 100%)",
+          }}
+        />
+
+        {/* ── NAV ── */}
+        <nav className="relative z-20 flex items-center justify-between px-6 md:px-10 py-5 flex-shrink-0">
+          <div className="flex items-center gap-2.5">
+            <div
+              className="w-8 h-8 rounded-lg flex items-center justify-center"
+              style={{ background: "rgba(255,255,255,0.18)", backdropFilter: "blur(8px)", border: "1px solid rgba(255,255,255,0.28)" }}
+            >
+              <Zap className="w-4 h-4 text-white" />
+            </div>
+            <span className="text-[15px] font-semibold text-white tracking-tight">NexusAI</span>
           </div>
-          <span className="text-lg font-semibold tracking-tight">NexusAI</span>
-        </div>
-        <div className="hidden md:flex items-center gap-8 text-sm text-zinc-400">
-          <a href="#features" className="hover:text-white transition-colors">Features</a>
-          <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
-          <a href="#demo" className="hover:text-white transition-colors">Demo</a>
-        </div>
-        <div className="flex items-center gap-3">
-          <Button variant="ghost" size="sm" asChild>
-            <Link href="/login">Sign in</Link>
-          </Button>
-          <Button size="sm" className="bg-violet-600 hover:bg-violet-700" asChild>
-            <Link href="/register">Get started</Link>
-          </Button>
-        </div>
-      </nav>
 
-      {/* Hero */}
-      <section className="relative z-10 flex flex-col items-center text-center px-6 pt-24 pb-32 max-w-5xl mx-auto">
-        <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/5 px-4 py-1.5 text-xs text-violet-300 mb-8 backdrop-blur-sm">
-          <span className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />
-          Production-ready · Open source · Self-hostable
-        </div>
+          <div className="hidden md:flex items-center gap-8 text-sm text-white/70 font-medium">
+            <a href="#features" className="hover:text-white transition-colors">Features</a>
+            <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
+            <a href="#demo" className="hover:text-white transition-colors">Demo</a>
+          </div>
 
-        <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-tight mb-6">
-          AI-Native SaaS
-          <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-violet-300 to-violet-500">
-            built for scale
-          </span>
-        </h1>
-
-        <p className="text-lg md:text-xl text-zinc-400 max-w-2xl mb-10 leading-relaxed">
-          Multi-tenant workspaces. Razorpay plan tiers. Redis rate limiting. JWT refresh rotation.
-          AI endpoints gated at middleware. Everything you need, nothing you don&apos;t.
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-4 items-center">
-          <Button size="xl" className="bg-violet-600 hover:bg-violet-700 shadow-lg shadow-violet-500/25" asChild>
-            <Link href="/login">
-              Try the demo <ArrowRight className="w-4 h-4" />
+          <div className="flex items-center gap-3">
+            <Link href="/login" className="text-sm text-white/75 hover:text-white transition-colors hidden sm:block font-medium">
+              Sign in
             </Link>
-          </Button>
-          <Button size="xl" variant="outline" className="border-white/10 text-white hover:bg-white/5" asChild>
-            <a href="https://github.com/vkxr/ai-saas" target="_blank" rel="noopener noreferrer">
-              View on GitHub
-            </a>
-          </Button>
-        </div>
+            <Link
+              href="/register"
+              className="text-[13px] font-semibold bg-white text-[#111] px-4 py-1.5 rounded-full hover:bg-white/90 transition-colors"
+            >
+              Get started
+            </Link>
+          </div>
+        </nav>
 
-        {/* Tech badges */}
-        <div className="flex flex-wrap gap-2 justify-center mt-12">
-          {["Next.js 15", "TypeScript", "PostgreSQL", "Prisma", "Redis", "Razorpay", "OpenRouter", "Docker"].map((tech) => (
+        {/* ── HERO CONTENT ── */}
+        <div className="relative z-10 flex-1 flex flex-col items-center justify-between px-6 pt-8 pb-10">
+
+          {/* Heading block — vertically centered */}
+          <div className="flex-1 flex flex-col items-center justify-center text-center max-w-4xl mx-auto">
+
+            {/* Announcement badge */}
+            <div
+              className="inline-flex items-center gap-2 rounded-full px-3 py-1 mb-8 text-xs text-white/80"
+              style={{ background: "rgba(0,0,0,0.35)", backdropFilter: "blur(8px)", border: "1px solid rgba(255,255,255,0.15)" }}
+            >
+              <span className="bg-green-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none">NEW</span>
+              AI-Native Multi-Tenant SaaS — production-ready
+              <ArrowRight className="w-3 h-3 opacity-60" />
+            </div>
+
+            <h1
+              className="font-bold text-white leading-[1.0] tracking-tight mb-5"
+              style={{ fontSize: "clamp(40px, 7vw, 76px)" }}
+            >
+              Build AI Products.
+              <br />
+              Ship with Confidence.
+            </h1>
+
+            <p className="text-base md:text-lg text-white/60 max-w-xl mb-10 leading-relaxed">
+              Multi-tenant workspaces, Razorpay billing, Redis rate limiting, and JWT rotation —
+              all wired up and production-ready.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-3 items-center">
+              <Link
+                href="/login"
+                className="inline-flex items-center gap-2 bg-white text-[#111] font-semibold px-7 py-2.5 rounded-full hover:bg-white/90 transition-colors text-sm shadow-lg"
+              >
+                Try the demo <ArrowRight className="w-4 h-4" />
+              </Link>
+              <a
+                href="https://github.com/vkxr/ai-saas"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 font-semibold px-7 py-2.5 rounded-full transition-colors text-sm text-white"
+                style={{ background: "rgba(255,255,255,0.12)", backdropFilter: "blur(8px)", border: "1px solid rgba(255,255,255,0.22)" }}
+              >
+                View on GitHub
+              </a>
+            </div>
+          </div>
+
+          {/* ── FLOATING DEMO CARD — bottom of hero ── */}
+          <div id="demo" className="w-full max-w-lg mt-8">
+            <div
+              className="rounded-2xl p-5 shadow-2xl"
+              style={{ background: "rgba(255,255,255,0.88)", backdropFilter: "blur(16px)", border: "1px solid rgba(255,255,255,0.6)" }}
+            >
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-7 h-7 rounded-lg bg-green-50 border border-green-100 flex items-center justify-center flex-shrink-0">
+                    <KeyRound className="w-3.5 h-3.5 text-green-700" />
+                  </div>
+                  <div>
+                    <p className="text-[13px] font-semibold text-[#111]">Try it instantly — no sign-up needed</p>
+                    <p className="text-[11px] text-gray-500">Use these credentials to explore the full platform</p>
+                  </div>
+                </div>
+                <span className="text-[10px] bg-green-50 text-green-700 border border-green-100 px-2 py-0.5 rounded-full font-semibold flex-shrink-0 ml-2">
+                  Live
+                </span>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3 mb-4">
+                {[
+                  { role: "Admin account", email: "admin@nexusai.dev", badge: "ADMIN" },
+                  { role: "Demo account", email: "demo@nexusai.dev", badge: "USER" },
+                ].map((cred) => (
+                  <div key={cred.email} className="rounded-xl bg-gray-50 border border-gray-100 p-3">
+                    <div className="flex items-center justify-between mb-2.5">
+                      <span className="text-[10px] text-gray-400 font-medium">{cred.role}</span>
+                      <span className="text-[9px] px-1.5 py-0.5 bg-white border border-gray-200 text-gray-500 rounded font-mono">
+                        {cred.badge}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-1.5 bg-white rounded-lg px-2.5 py-1.5 border border-gray-100 mb-1.5">
+                      <span className="text-[11px] text-gray-600 font-mono truncate flex-1">{cred.email}</span>
+                      <Copy className="w-2.5 h-2.5 text-gray-300 flex-shrink-0" />
+                    </div>
+                    <div className="flex items-center gap-1.5 bg-white rounded-lg px-2.5 py-1.5 border border-gray-100">
+                      <span className="text-[11px] text-gray-600 font-mono flex-1">Password123!</span>
+                      <Copy className="w-2.5 h-2.5 text-gray-300 flex-shrink-0" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <Link
+                href="/login"
+                className="flex items-center justify-center gap-2 w-full bg-[#111] text-white text-[13px] font-semibold py-2.5 rounded-xl hover:bg-gray-900 transition-colors"
+              >
+                Sign in to explore <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════
+          TECH BADGES
+      ══════════════════════════════════════════ */}
+      <div className="bg-white border-b border-gray-100 py-5 px-6">
+        <div className="max-w-5xl mx-auto flex flex-wrap gap-2 justify-center">
+          {TECHS.map((tech) => (
             <span
               key={tech}
-              className="px-3 py-1 rounded-full text-xs border border-white/8 bg-white/3 text-zinc-400"
+              className="px-3.5 py-1 rounded-full text-xs border border-gray-200 bg-gray-50 text-gray-500 font-medium"
             >
               {tech}
             </span>
           ))}
         </div>
-      </section>
+      </div>
 
-      {/* Demo Credentials */}
-      <section id="demo" className="relative z-10 px-6 pb-20 max-w-3xl mx-auto">
-        <div className="rounded-2xl border border-emerald-500/25 bg-emerald-500/5 p-8">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-9 h-9 rounded-xl bg-emerald-500/15 border border-emerald-500/25 flex items-center justify-center">
-              <KeyRound className="w-4 h-4 text-emerald-400" />
-            </div>
-            <div>
-              <h2 className="text-base font-semibold text-white">Try it instantly — no sign-up needed</h2>
-              <p className="text-sm text-zinc-400">Use these credentials to explore the full platform</p>
-            </div>
+      {/* ══════════════════════════════════════════
+          FEATURES
+      ══════════════════════════════════════════ */}
+      <section id="features" className="bg-white px-6 py-24">
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-14 max-w-xl">
+            <p className="text-xs font-bold text-green-700 tracking-widest uppercase mb-3">Features</p>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-3 text-[#111]">
+              Production from day one
+            </h2>
+            <p className="text-gray-500 leading-relaxed">
+              Every architectural decision made for real-world deployment, not toy demos.
+            </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 gap-4 mb-6">
-            {[
-              { role: "Admin account", email: "admin@nexusai.dev", password: "Password123!", badge: "ADMIN" },
-              { role: "Demo account", email: "demo@nexusai.dev", password: "Password123!", badge: "USER" },
-            ].map((cred) => (
-              <div key={cred.email} className="rounded-xl border border-white/8 bg-white/3 p-4">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-xs text-zinc-500">{cred.role}</span>
-                  <span className="text-[10px] px-2 py-0.5 rounded-full border border-white/10 bg-white/5 text-zinc-400 font-mono">
-                    {cred.badge}
-                  </span>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {features.map((f) => (
+              <div
+                key={f.title}
+                className="group p-6 rounded-2xl border border-gray-100 hover:border-gray-200 hover:shadow-sm bg-white transition-all duration-200 cursor-default"
+              >
+                <div className="w-9 h-9 rounded-xl bg-green-50 flex items-center justify-center mb-4">
+                  <f.icon className="w-5 h-5 text-green-700" />
                 </div>
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between gap-2 rounded-lg bg-black/30 px-3 py-2">
-                    <span className="text-xs text-zinc-400 font-mono truncate">{cred.email}</span>
-                    <Copy className="w-3 h-3 text-zinc-600 flex-shrink-0" />
-                  </div>
-                  <div className="flex items-center justify-between gap-2 rounded-lg bg-black/30 px-3 py-2">
-                    <span className="text-xs text-zinc-400 font-mono">{cred.password}</span>
-                    <Copy className="w-3 h-3 text-zinc-600 flex-shrink-0" />
-                  </div>
-                </div>
+                <h3 className="font-semibold text-[#111] mb-2">{f.title}</h3>
+                <p className="text-sm text-gray-500 leading-relaxed">{f.description}</p>
               </div>
             ))}
           </div>
-
-          <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white" asChild>
-            <Link href="/login">
-              Sign in to the demo <ArrowRight className="w-4 h-4" />
-            </Link>
-          </Button>
         </div>
       </section>
 
-      {/* Features */}
-      <section id="features" className="relative z-10 px-6 pb-32 max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Production from day one
-          </h2>
-          <p className="text-zinc-400 max-w-xl mx-auto">
-            Every architectural decision made for real-world production deployment, not toy demos.
-          </p>
-        </div>
+      {/* ══════════════════════════════════════════
+          PRICING
+      ══════════════════════════════════════════ */}
+      <section id="pricing" className="bg-[#f7f6f3] px-6 py-24">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-14">
+            <p className="text-xs font-bold text-green-700 tracking-widest uppercase mb-3">Pricing</p>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-3 text-[#111]">
+              Simple, transparent pricing
+            </h2>
+            <p className="text-gray-500">Start free. Scale when you need it.</p>
+          </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {features.map((f) => (
-            <div
-              key={f.title}
-              className="group relative rounded-2xl border border-white/8 bg-white/2 p-6 hover:border-violet-500/30 hover:bg-violet-500/5 transition-all duration-300"
-            >
-              <div className="w-10 h-10 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center mb-4 group-hover:bg-violet-500/20 transition-colors">
-                <f.icon className="w-5 h-5 text-violet-400" />
-              </div>
-              <h3 className="font-semibold mb-2">{f.title}</h3>
-              <p className="text-sm text-zinc-400 leading-relaxed">{f.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Pricing */}
-      <section id="pricing" className="relative z-10 px-6 pb-32 max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Simple, transparent pricing</h2>
-          <p className="text-zinc-400">Start free. Scale when you need it.</p>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-6">
-          {plans.map((plan) => (
-            <div
-              key={plan.name}
-              className={`relative rounded-2xl border p-8 flex flex-col ${
-                plan.highlighted
-                  ? "border-violet-500/50 bg-violet-500/5 shadow-lg shadow-violet-500/10"
-                  : "border-white/8 bg-white/2"
-              }`}
-            >
-              {plan.badge && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <Badge className="bg-violet-600 text-white border-0 text-xs px-3">
-                    {plan.badge}
-                  </Badge>
-                </div>
-              )}
-              <div className="mb-6">
-                <p className="text-sm text-zinc-400 mb-1">{plan.name}</p>
-                <div className="flex items-baseline gap-1 mb-2">
-                  <span className="text-4xl font-bold">{plan.price}</span>
-                  {plan.per && <span className="text-zinc-400 text-sm">{plan.per}</span>}
-                </div>
-                <p className="text-sm text-zinc-400">{plan.description}</p>
-              </div>
-
-              <ul className="space-y-3 mb-8 flex-1">
-                {plan.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2 text-sm text-zinc-300">
-                    <span className="w-4 h-4 rounded-full bg-violet-500/20 text-violet-400 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs">✓</span>
-                    {f}
-                  </li>
-                ))}
-              </ul>
-
-              <Button
-                className={plan.highlighted ? "bg-violet-600 hover:bg-violet-700" : ""}
-                variant={plan.highlighted ? "default" : "outline"}
-                asChild
+          <div className="grid md:grid-cols-3 gap-5">
+            {plans.map((plan) => (
+              <div
+                key={plan.name}
+                className={`relative rounded-2xl border p-7 flex flex-col bg-white transition-shadow ${
+                  plan.highlighted
+                    ? "border-green-200 shadow-lg shadow-green-500/8"
+                    : "border-gray-100 hover:shadow-sm"
+                }`}
               >
-                <Link href="/register">{plan.cta}</Link>
-              </Button>
-            </div>
-          ))}
+                {plan.badge && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                    <span className="bg-green-700 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                      {plan.badge}
+                    </span>
+                  </div>
+                )}
+                <div className="mb-6">
+                  <p className="text-sm text-gray-400 font-medium mb-1">{plan.name}</p>
+                  <div className="flex items-baseline gap-1 mb-2">
+                    <span className="text-4xl font-bold text-[#111]">{plan.price}</span>
+                    {plan.per && <span className="text-gray-400 text-sm">{plan.per}</span>}
+                  </div>
+                  <p className="text-sm text-gray-400">{plan.description}</p>
+                </div>
+
+                <ul className="space-y-2.5 mb-8 flex-1">
+                  {plan.features.map((feat) => (
+                    <li key={feat} className="flex items-start gap-2 text-sm text-gray-600">
+                      <span className="w-4 h-4 rounded-full bg-green-50 text-green-700 flex items-center justify-center flex-shrink-0 mt-0.5 text-[10px] font-bold">
+                        ✓
+                      </span>
+                      {feat}
+                    </li>
+                  ))}
+                </ul>
+
+                <Link
+                  href="/register"
+                  className={`block text-center text-sm font-semibold py-2.5 rounded-xl transition-colors ${
+                    plan.highlighted
+                      ? "bg-green-700 text-white hover:bg-green-800"
+                      : "border border-gray-200 text-[#111] hover:bg-gray-50"
+                  }`}
+                >
+                  {plan.cta}
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="relative z-10 px-6 pb-32 max-w-3xl mx-auto text-center">
-        <div className="rounded-2xl border border-violet-500/20 bg-violet-500/5 p-12">
-          <h2 className="text-3xl font-bold mb-4">Ready to ship your AI product?</h2>
-          <p className="text-zinc-400 mb-8">
-            Clone, configure, deploy. Your production AI SaaS is minutes away.
+      {/* ══════════════════════════════════════════
+          CTA
+      ══════════════════════════════════════════ */}
+      <section className="bg-[#111] text-white px-6 py-24 text-center">
+        <div className="max-w-xl mx-auto">
+          <p className="text-xs font-bold text-green-500 tracking-widest uppercase mb-5">Ready to ship?</p>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+            Your AI product,<br />production-ready today.
+          </h2>
+          <p className="text-gray-400 mb-10 leading-relaxed">
+            Clone, configure, deploy. Full SaaS infrastructure in minutes, not months.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Button size="xl" className="bg-violet-600 hover:bg-violet-700" asChild>
-              <Link href="/register">
-                Create free account <ArrowRight className="w-4 h-4" />
-              </Link>
-            </Button>
-            <Button size="xl" variant="outline" className="border-white/10 text-white hover:bg-white/5" asChild>
-              <a href="https://github.com/vkxr/ai-saas" target="_blank" rel="noopener noreferrer">
-                View source
-              </a>
-            </Button>
+            <Link
+              href="/register"
+              className="inline-flex items-center justify-center gap-2 bg-white text-[#111] font-semibold px-8 py-3 rounded-full hover:bg-gray-100 transition-colors text-sm"
+            >
+              Create free account <ArrowRight className="w-4 h-4" />
+            </Link>
+            <a
+              href="https://github.com/vkxr/ai-saas"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 border border-white/15 text-white font-semibold px-8 py-3 rounded-full hover:bg-white/8 transition-colors text-sm"
+            >
+              View source
+            </a>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="relative z-10 border-t border-white/5 py-8 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-zinc-500">
+      {/* ══════════════════════════════════════════
+          FOOTER
+      ══════════════════════════════════════════ */}
+      <footer className="bg-[#111] border-t border-white/6 py-8 px-6">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500">
           <div className="flex items-center gap-2">
-            <div className="w-5 h-5 rounded bg-violet-600 flex items-center justify-center">
+            <div className="w-5 h-5 rounded bg-green-700 flex items-center justify-center">
               <Zap className="w-3 h-3 text-white" />
             </div>
-            <span>NexusAI © 2025</span>
+            <span className="text-gray-400 font-medium">NexusAI</span>
+            <span className="text-gray-700">© 2025</span>
           </div>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-zinc-300 transition-colors">Privacy</a>
-            <a href="#" className="hover:text-zinc-300 transition-colors">Terms</a>
-            <a href="https://github.com/vkxr/ai-saas" className="hover:text-zinc-300 transition-colors">GitHub</a>
+            <a href="#" className="hover:text-gray-300 transition-colors">Privacy</a>
+            <a href="#" className="hover:text-gray-300 transition-colors">Terms</a>
+            <a
+              href="https://github.com/vkxr/ai-saas"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-gray-300 transition-colors"
+            >
+              GitHub
+            </a>
           </div>
         </div>
       </footer>
